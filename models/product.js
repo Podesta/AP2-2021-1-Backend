@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const productSchema = new mongoose.Schmea({
+const productSchema = new mongoose.Schema({
   title: { type: String, required: true },
   imageMain: { type: String, required: true },
   imageSecondary: [
     { type: String }
   ],
   onSale: { type: Boolean, default: false },
-  isNew: { type: Boolean, default: false },
+  onNew: { type: Boolean, default: false },
   categories: [
     { type: String, required: true }
   ],
