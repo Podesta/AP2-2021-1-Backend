@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 
+const loginRouter = require('./controllers/login');
 const productRouter = require('./controllers/products');
 const userRouter = require('./controllers/user');
 const config = require('./utils/config');
@@ -28,6 +29,7 @@ app.use(morgan('tiny', {
 
 app.use(middleware.tokenExtractor);
 
+app.use('/api/login', loginRouter);
 app.use('/api/products', middleware.userExtractor, productRouter);
 app.use('/api/users', userRouter);
 
