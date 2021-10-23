@@ -22,7 +22,10 @@ productRouter.post('/', async (req, res, next) => {
   const product = new Product({
     title: req.body.title,
     imageMain: req.body.imageMain,
+    imageSecondary: req.body.imageSecondary,
     categories: req.body.categories,
+    onSale: req.body.onSale,
+    onNew: req.body.onNew,
   });
 
   const addedProduct = await product.save();
