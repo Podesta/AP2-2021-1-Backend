@@ -1,5 +1,6 @@
 const logger = require('./logger');
 const jwt = require('jsonwebtoken');
+const upload = require('../services/imagesUpload');
 
 const unknownEndpoint = (req, res) => {
   res.status(204).send({ error: 'unknown endpoint' });
@@ -16,6 +17,8 @@ const errorHandler = (error, req, res, next) => {
     return res.status(401).json({ error: 'invalid token' });
   } else if (error.name === 'TokenExpiredError') {
     return res.status(401).json({ error: 'token expired' });
+  } else if (error.name === 'MulterError') {
+    return res.status(401).json({ error: 'unexpected multer field' });
   }
 
   next(error);

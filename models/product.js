@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  imageMain: { type: String, required: true },
+  imageMain: { type: String, required: true, default: 'https://sboffice.s3.us-east-2.amazonaws.com/image-not-available.jpg' },
   imageSecondary: [
     { type: String }
   ],
