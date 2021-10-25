@@ -1,6 +1,5 @@
 const productRouter = require('express').Router();
 const Product = require('../models/product');
-const User = require('../models/user');
 const uploadImages = require('../services/imagesUpload').uploadImages;
 const imagesSplit = require('../services/imagesHandler');
 
@@ -57,9 +56,11 @@ productRouter.put('/:id/upload', uploadImages, async (req, res, next) => {
     return res.status(401).json({ error: 'token missing or invalid' });
   }
 
-  const urlImgs = imagesSplit(req.files);
-  product.imageMain = urlImgs[0][0];
-  product.imageSecondary = urlImgs[1];
+  if (req.files) {
+    const urlImgs = imagesSplit(req.files);
+    product.imageMain = urlImgs[0][0];
+    product.imageSecondary = urlImgs[1];
+  }
 
   const updatedProduct = await Product.findByIdAndUpdate(id, product, { new: true });
   if (!updatedProduct) {

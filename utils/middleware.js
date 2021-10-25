@@ -1,6 +1,5 @@
 const logger = require('./logger');
 const jwt = require('jsonwebtoken');
-const upload = require('../services/imagesUpload');
 
 const unknownEndpoint = (req, res) => {
   res.status(204).send({ error: 'unknown endpoint' });

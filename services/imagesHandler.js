@@ -1,7 +1,14 @@
 const imagesSplit = files => {
+  let mainImg = [];
+  let secImg = [];
 
-  const mainImg = files['mainImage'].map(image => image.location);
-  const secImg = files['secImages'].map(image => image.location);
+  if (files['mainImage']) {
+    mainImg = files['mainImage'].map(image => image.location);
+  }
+
+  if (files['secImages']) {
+    secImg = files['secImages'].map(image => image.location);
+  }
 
   return [mainImg, secImg];
 };

@@ -16,7 +16,7 @@ const upload = multer({
     bucket: process.env.AWS_BUCKET_NAME,
     contentType: multerS3.AUTO_CONTENT_TYPE,
     metadata: (req, file, cb) => {
-      cb(null, {fieldName: file.fieldname});
+      cb(null, { fieldName: file.fieldname });
     },
     key: (req, file, cb) => {
       const fileName = path.basename(file.originalname);
@@ -27,11 +27,11 @@ const upload = multer({
 });
 
 const uploadImages = upload.fields([
-    { name: 'mainImage', maxCount: 1 },
-    { name: 'secImages' }
+  { name: 'mainImage', maxCount: 1 },
+  { name: 'secImages' }
 ]);
 
 module.exports = {
   upload,
   uploadImages,
-}
+};
