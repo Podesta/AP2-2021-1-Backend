@@ -10,6 +10,16 @@ const s3 = new aws.S3({
   secretAccessKey: process.env.AWS_SECRET_KEY,
 });
 
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' ||
+      file.mimetype === 'image/jpg' ||
+      file.mimetype === 'image/png') {
+    cb(null, true);
+  } else {
+    cb(new Error('bad file extension'));
+  }
+};
+
 const upload = multer({
   storage: multerS3({
     s3: s3,
@@ -24,6 +34,7 @@ const upload = multer({
       cb(null, `${path.basename(fileName, extension)}-${Date.now()}${extension}`);
     },
   }),
+  fileFilter: fileFilter,
 });
 
 const uploadImages = upload.fields([

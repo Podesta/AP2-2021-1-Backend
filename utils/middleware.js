@@ -18,6 +18,8 @@ const errorHandler = (error, req, res, next) => {
     return res.status(401).json({ error: 'token expired' });
   } else if (error.name === 'MulterError') {
     return res.status(401).json({ error: 'unexpected multer field' });
+  } else if (error.message === 'bad file extension') {
+    return res.status(401).json({ error: 'file extension not supported' });
   }
 
   next(error);
